@@ -3,59 +3,55 @@
 {% block title %}Booking{% endblock %}
 
 {% block content %}
-    <h1 class="mb-4">Book Your Service</h1>
-    <div class="row">
-        <div class="col-md-6">
-            <img src="https://pmcaonline.org/wp-content/uploads/2019/10/hotel-1068x801.jpg" class="img-fluid mb-3" alt="Service Image">
-        </div>
-        <div class="col-md-6">
-            <p>Select your preferred service:</p>
-            <select id="serviceSelect" class="form-select mb-3" aria-label="Select Service">
-                <option selected>Select Service</option>
-                {% for service in services %}
-                <option value="{{ service }}">{{ service }}</option>
-                {% endfor %}
-            </select>
-            <button id="bookNowBtn" class="btn btn-primary">Book Now</button>
-        </div>
-    </div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hotel Prices</title>
+    <!-- Include the axios library -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        /* Add some basic CSS styles for better presentation */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hotel Prices</h1>
+    <div id="prices"></div>
 
     <script>
-        // JavaScript code to handle form submission using AJAX
-        const bookNowBtn = document.getElementById('bookNowBtn');
-        const serviceSelect = document.getElementById('serviceSelect');
+        // Define the API url
+        const url = "https://apidojo-booking-v1.p.rapidapi.com/currency/get-exchange-rates?api_key=51d88be3cfmshc0d5d8f34a52783p1527c2jsnfab1019e5285";
 
-        bookNowBtn.addEventListener('click', function() {
-            const selectedService = serviceSelect.value;
+        // Send a GET request to the API
+        axios.get(url)
+        .then(response => {
+            // Handle the response data
+            const data = response.data;
 
-            // Check if a service is selected
-            if (selectedService === 'Select Service') {
-                alert('Please select a service before booking.');
-                return;
+            // Check if data.prices exists
+            if (data && data.prices) {
+                let output = "<ul>";
+                for (let price of data.prices) {
+                    output += `<li>${price.hotelName}: ${price.price}</li>`;
+                }
+                output += "</ul>";
+                document.getElementById("prices").innerHTML = output;
+            } else {
+                document.getElementById("prices").innerHTML = "No data available.";
             }
-
-            // Send form data to the server using AJAX
-            const formData = new FormData();
-            formData.append('service', selectedService);
-
-            fetch('/book_now', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle the response from the server (data storage confirmation)
-                console.log(data.message);
-                alert('Booking confirmed!'); // You can customize this confirmation message
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error occurred while booking. Please try again later.'); // Error message
-            });
+        })
+        .catch(error => {
+            // Handle the error
+            console.error(error);
+            document.getElementById("prices").innerHTML = `Error occurred while fetching data: ${error.message}`;
         });
     </script>
+</body>
+</html>
 {% endblock %}
-
-
-
-
