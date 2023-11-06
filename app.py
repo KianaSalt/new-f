@@ -34,10 +34,24 @@ def home():
 # Booking route
 @app.route("/booking")                   
 def booking():
+    url = "https://apidojo-booking-v1.p.rapidapi.com/currency/get-exchange-rates"
+
+    querystring = {"base_currency":"USD","languagecode":"en-us"}
+
+    headers = {
+	"X-RapidAPI-Key": "b9acad5e50msh9b9087d682ca9d9p1a812fjsnbc3e76195a9b",
+	"X-RapidAPI-Host": "apidojo-booking-v1.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+    data = response.json()
+    return data
+    
+     
     # Perform API request (if needed)
     # ...
-    available_services = ["Service A", "Service B", "Service C", "Service D", "Service E"]  # List of available services
-    return render_template("booking.html", services=available_services)
+    #available_services = ["Service A", "Service B", "Service C", "Service D", "Service E"]  # List of available services
+    #return render_template("booking.html", services=available_services)
 
 
 # Suggestions route

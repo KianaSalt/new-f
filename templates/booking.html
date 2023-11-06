@@ -2,13 +2,15 @@
 
 {% block title %}Booking{% endblock %}
 
+
+
 {% block content %}
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
 <head>
-    <title>Hotel Prices</title>
+    <title>Hotel Prices</title>-->
     <!-- Include the axios library -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
         /* Add some basic CSS styles for better presentation */
         ul {
@@ -22,10 +24,10 @@
 </head>
 <body>
     <h1>Hotel Prices</h1>
-    <div id="prices"></div>
+    <div id="prices"></div>-->
 
-    <script>
-        // Define the API url
+   <!--<script>
+      // Define the API url
         const url = "https://apidojo-booking-v1.p.rapidapi.com/currency/get-exchange-rates?api_key=51d88be3cfmshc0d5d8f34a52783p1527c2jsnfab1019e5285";
 
         // Send a GET request to the API
@@ -51,7 +53,7 @@
             console.error(error);
             document.getElementById("prices").innerHTML = `Error occurred while fetching data: ${error.message}`;
         });
-    </script>
+    </script>-->
 </body>
 </html>
 {% endblock %}
