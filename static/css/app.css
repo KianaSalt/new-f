@@ -1,0 +1,18 @@
+.top-section {
+    background-image: url('https://images.unsplash.com/photo-1522143804971-93c748148fbd?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8c2VyZW5lfGVufDB8fDB8fHww');
+    background-size: 2000px 1000px; /* Set fixed width and height */
+    background-position: center;
+    background-attachment: fixed; /* Keep the background fixed within the viewport */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    
+    /* Other background properties can be added as needed */
+}
+.home-section {
+    background-image: url('https://luxcior.com/wp-content/uploads/2021/03/viajo.jpg');
+    background-size: 2000px 1000px; /* Set fixed width and height */
+    background-position: center;
+    background-attachment: fixed; /* Keep the background fixed within the viewport */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    
+    /* Other background properties can be added as needed */
+}

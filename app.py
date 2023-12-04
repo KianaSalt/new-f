@@ -8,14 +8,6 @@ import json
 
 app = Flask(__name__)
 
-booked_services = []
-
-tips_data = [
-    {"text": "Pack light and smart.", "url": "https://www.travelandleisure.com/travel-tips/packing-tips/travel-editor-packing-tips?cjdata=MXxOfDB8WXww&cjevent=05b529406b5e11ee814640fc0a82b824&utm_source=CJ&utm_medium=affiliate"},
-    {"text": "Learn a few local phrases.", "url": "https://blog.oncallinternational.com/before-you-travel-key-phrases-to-learn-in-the-local-language/"},
-    {"text": "Respect local customs and traditions.", "url": "https://www.kayak.com.au/news/travel-etiquette-tips/#:~:text=7%20Travel%20Etiquette%20Advice%20To%20Better%20Respect%20Local,...%207%207.%20DO%20watch%20your%20dress%20code"},
-    # Add more tips as needed
-]
 hotels_data = [
     {"name": "Hotel A", "location": "City A"},
     {"name": "Hotel B", "location": "City B"},
@@ -26,9 +18,7 @@ hotels_data = [
 # Home route
 @app.route("/")                   
 def home():
-    return render_template("index.html", travel_tips=tips_data)
-
-
+    return render_template("home.html")
 
 
 # Booking route
@@ -46,27 +36,17 @@ def booking():
     response = requests.get(url, headers=headers, params=querystring)
     data = response.json()
     return data
-    
-     
-    # Perform API request (if needed)
-    # ...
-    #available_services = ["Service A", "Service B", "Service C", "Service D", "Service E"]  # List of available services
-    #return render_template("booking.html", services=available_services)
-
 
 # Suggestions route
 @app.route("/suggestions")                   
 def end():
-    url = "https://best-booking-com-hotel.p.rapidapi.com/booking/best-accommodation"
 
-   # List of query strings
+    #API
+    url = "https://best-booking-com-hotel.p.rapidapi.com/booking/best-accommodation"
     querystrings = [
-    {"cityName": "Berlin", "countryName": "Germany"},
-    {"cityName": "Atlanta", "countryName": "Georgia"},
-    
-    ] #{"cityName": "Bangkok", "countryName": "Thailand"}
-   #querystring = {"cityName":"Berlin","countryName":"Germany"}
-    #querystring2 = {"cityName":"Atlanta","countryName":"Georgia"}
+     {"cityName": "Bangkok", "countryName": "Thailand"},
+    {"cityName": "Punta Cana", "countryName": "Dominican Republic"},  
+    ] 
 
     headers = {
     "X-RapidAPI-Key": "b9acad5e50msh9b9087d682ca9d9p1a812fjsnbc3e76195a9b",
@@ -77,36 +57,11 @@ def end():
     for querystring in querystrings:
         response = requests.get(url, headers=headers, params=querystring)
 
-    #data = response.json()
-        #if response.status_code != 200:
-            #return f"Error: Received status code {response.status_code} from API."
         data = response.json()
 
         all_data.append(data)
 
-    return render_template("suggestions.html", datum=all_data)  # Pass the city data to the template
-
-
-
-
-#return render_template("end.html")
-
-    
-
-# About Route
-@app.route("/about")
-def about():
-    return render_template("about.html")
-#Book Now
-@app.route("/book-now", methods=["GET", "POST"])
-def book_now():
-    if request.method == "POST":
-        selected_service = request.form.get("service")
-        # Handle the selected service (store it in a database, etc.)
-        return render_template("booking_confirmation.html", service=selected_service)
-    else:
-        return render_template("book_now.html", services=available_services)
-
+    return render_template("suggestions.html", datum=all_data)  
 
 
 # Get hotels route (if needed)
