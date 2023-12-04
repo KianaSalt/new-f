@@ -1,15 +1,31 @@
 {% extends "index.html" %}
 
-
 {% block content %}
 
 <body>
-    <h2>Hotel Information</h2>
-    <p><strong>Name:</strong> {{ datum.name }}</p>
-    <p><strong>Link:</strong> <a href="{{ datum.link }}" target="_blank">Booking Link</a></p>
-    <p><strong>Rating:</strong> {{ datum.rating }}</p>
-</body>
+    <form method="POST" action="{{ url_for('booking') }}">
+        <div class="input-box">
+            <label for="cityName">City Name:</label>
+            <input type="text" id="cityName" name="cityName">
+        </div>
+
+        <div class="input-box">
+            <label for="countryName">Country Name:</label>
+            <input type="text" id="countryName" name="countryName">
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+        <h2>Hotel Information</h2>
+            <div>
+                <p><strong>Name:</strong> {{ datum.name }}</p>
+                <p><strong>Link:</strong> <a href="{{ datum.link }}" target="_blank">Booking Link</a></p>
+                <p><strong>Rating:</strong> {{datum.rating }}</p>
+            </div>
+            <hr>
+        
     
+</body>
+
 {% endblock %}
-
-

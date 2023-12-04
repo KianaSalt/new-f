@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 import requests
 import os
 import asyncio
@@ -22,20 +22,29 @@ def home():
 
 
 # Booking route
-@app.route("/booking")                   
+@app.route("/booking", methods=['GET', 'POST'])
 def booking():
-    url = 'https://best-booking-com-hotel.p.rapidapi.com/booking/best-accommodation'
-    querystring = {"cityName":"Berlin", "countryName":"Germany"}
+    if request.method == 'POST':
+        cityName = request.form.get('cityName')
+        countryName = request.form.get('countryName')
 
-    headers = {
-        "X-RapidAPI-Key": "68bb373953mshbd91a0f0832fa34p15047cjsnb7984d237ebc",
-        "X-RapidAPI-Host": "best-booking-com-hotel.p.rapidapi.com"
-    }
+        # Fetch data from the API using user input
+        url = 'https://best-booking-com-hotel.p.rapidapi.com/booking/best-accommodation'
+        querystring = {"cityName": cityName, "countryName": countryName}
 
-  
-    response = requests.get(url, headers=headers, params=querystring)
-    data = response.json()
-    return render_template("booking.html", datum=data)
+        headers = {
+            "X-RapidAPI-Key": "aa25bc40cfmshcf78ffdb3d74cd4p1af2f5jsn7e50f017bcd3",
+	        "X-RapidAPI-Host": "best-booking-com-hotel.p.rapidapi.com"
+        }
+
+        response = requests.get(url, headers=headers, params=querystring)
+        data = response.json()
+
+            # Print the API response to the console
+        #print("API Response:")
+        #print(cityName)
+
+        return render_template("booking.html", datum=data)
 
     
     
@@ -43,7 +52,6 @@ def booking():
     
     
     
-    #return response.json()
     #data = response.json()
     #print(data)
     #return render_template("booking.html", datum=data)
