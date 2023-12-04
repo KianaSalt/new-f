@@ -20,9 +20,9 @@ What things you need to install the software and how to install them:
 https://render.com
 
 # Built With
-Flask - The web framework used
-Python - Programming Language
-SQLite - Database Engine (if used)
+- Flask - The web framework used
+- Python - Programming Language
+- SQLite - Database Engine (if used)
 
 # Contributing
 booking.com
@@ -32,8 +32,8 @@ booking.com
 We use GitHub for version control. For the versions available, see the tags on this repository.
 
 # Authors
-Terence Jones
-Kiana Salter
+- Terence Jones
+- Kiana Salter
 
 
 # Acknowledgments
