@@ -1,6 +1,5 @@
-# OnTheGo
 
-# OnTheGo README Template
+# OnTheGo README 
 This README template is designed for a Travel web application. 
 
 # Project Title
