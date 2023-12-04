@@ -4,7 +4,7 @@
 This README template is designed for a Travel web application. 
 
 # Project Title
-A Traveling web App that gives the customer, location, prices and more..
+A Traveling web App named OnTheGo that helps with planning trips. This app will help consumers book hotels, give suggested destinations and tourist attractions.
 
 # Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
