@@ -1,65 +1,15 @@
 {% extends "index.html" %}
 
-{% block title %}Booking{% endblock %}
 
 {% block content %}
-    <header>
-        <h1>Welcome to Our Hotel Booking Service</h1>
-    </header>
 
-    <main>
-        <section>
-            <h2>Find Hotels</h2>
-            <button id="loadData">Load Hotels</button>
-            <div id="hotelList"></div>
-        </section>
-    </main>
-
-    <footer>
-        <p>© 2023 Hotel Booking Service</p>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        document.getElementById('loadData').addEventListener('click', async function() {
-            const options = {
-                method: 'GET',
-                url: 'https://best-booking-com-hotel.p.rapidapi.com/booking/best-accommodation',
-                params: { cityName: 'Berlin', countryName: 'Germany' },
-                headers: {
-                    'X-RapidAPI-Key': "68bb373953mshbd91a0f0832fa34p15047cjsnb7984d237ebc",
-                    'X-RapidAPI-Host': 'best-booking-com-hotel.p.rapidapi.com'
-                }
-            };
-
-            try {
-                const response = await axios.request(options);
-                // Assuming the hotels data is an array in response.data
-                const hotels = Array.isArray(response.data) ? response.data : [];
-                const hotelListElement = document.getElementById('hotelList');
-                hotelListElement.innerHTML = '';
-
-                hotels.forEach(hotel => {
-                    const hotelDiv = document.createElement('div');
-                    hotelDiv.className = 'hotel';
-                    // Adjust these lines based on the actual structure of hotel data
-                    hotelDiv.innerHTML = `
-                        <div class="hotel-info"><strong>${hotel.name}</strong></div>
-                        <div class="hotel-info">${hotel.address}</div>
-                        <button onclick="bookNow('${hotel.name}')">Book Now</button>
-                    `;
-                    hotelListElement.appendChild(hotelDiv);
-                });
-            } catch (error) {
-                console.error(error);
-                document.getElementById('hotelList').innerHTML = 'Error loading hotels.';
-            }
-        });
-
-        function bookNow(hotelName) {
-            alert(`Booking confirmed for ${hotelName}!`);
-        }
-    </script>
+<body>
+    <h2>Hotel Information</h2>
+    <p><strong>Name:</strong> {{ datum.name }}</p>
+    <p><strong>Link:</strong> <a href="{{ datum.link }}" target="_blank">Booking Link</a></p>
+    <p><strong>Rating:</strong> {{ datum.rating }}</p>
+</body>
+    
 {% endblock %}
 
 

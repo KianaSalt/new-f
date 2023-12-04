@@ -32,15 +32,21 @@ def booking():
         "X-RapidAPI-Host": "best-booking-com-hotel.p.rapidapi.com"
     }
 
-    try:
-        response = requests.get(url, headers=headers, params=querystring)
-        response.raise_for_status()
-        data = response.json()
-        return render_template("booking.html", datum=data)
-    except requests.exceptions.RequestException as e:
-        return f"An error occurred: {e}"
+  
+    response = requests.get(url, headers=headers, params=querystring)
+    data = response.json()
+    return render_template("booking.html", datum=data)
 
-
+    
+    
+    
+    
+    
+    
+    #return response.json()
+    #data = response.json()
+    #print(data)
+    #return render_template("booking.html", datum=data)
 
 # Suggestions route
 @app.route("/suggestions")                   
@@ -68,31 +74,6 @@ def end():
 
     return render_template("suggestions.html", datum=all_data)  
 
-
-# Get hotels route (if needed)
-@app.route("/get_hotels")                   
-def get_hotels():
-    url = "https://apidojo-booking-v1.p.rapidapi.com/currency/get-exchange-rates?rapidapi-key=ff511b0e11msh532c009df749b7fp1c32f0jsncc64d31ee82a"
-    querystring = {"cityName": "Berlin", "countryName": "Germany"}
-
-    headers = {
-         "X-RapidAPI-Key": "ff511b0e11msh532c009df749b7fp1c32f0jsncc64d31ee82a",
-         "X-RapidAPI-Host": "apidojo-booking-v1.p.rapidapi.com"
-    }
-
-    try:
-        response = requests.get(url, headers=headers, params=querystring)
-        response.raise_for_status()  # Raise an HTTPError for bad requests (4xx and 5xx status codes)
-        hotels_data = response.json().get("data", [])
-        return render_template("hotels.html", hotels=hotels_data)
-    except requests.exceptions.HTTPError as errh:
-        return f"HTTP Error: {errh}"
-    except requests.exceptions.ConnectionError as errc:
-        return f"Error Connecting: {errc}"
-    except requests.exceptions.Timeout as errt:
-        return f"Timeout Error: {errt}"
-    except requests.exceptions.RequestException as err:
-        return f"Something went wrong: {err}"
 
 if __name__ == "__main__":
     app.run(debug=True)
