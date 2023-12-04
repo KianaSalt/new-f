@@ -25,24 +25,21 @@ def home():
 @app.route("/booking")                   
 def booking():
     url = 'https://best-booking-com-hotel.p.rapidapi.com/booking/best-accommodation'
-
     querystring = {"cityName":"Berlin", "countryName":"Germany"}
 
     headers = {
-	"X-RapidAPI-Key": "68bb373953mshbd91a0f0832fa34p15047cjsnb7984d237ebc",
-	"X-RapidAPI-Host": "best-booking-com-hotel.p.rapidapi.com"
+        "X-RapidAPI-Key": "68bb373953mshbd91a0f0832fa34p15047cjsnb7984d237ebc",
+        "X-RapidAPI-Host": "best-booking-com-hotel.p.rapidapi.com"
     }
-    all_data = []
 
-    for querystring in querystrings:
-    response = requests.get(url, headers=headers, params=querystring)
-    
-    data = response.json()
+    try:
+        response = requests.get(url, headers=headers, params=querystring)
+        response.raise_for_status()
+        data = response.json()
+        return render_template("booking.html", datum=data)
+    except requests.exceptions.RequestException as e:
+        return f"An error occurred: {e}"
 
-
-    all_data.append(data)
-
-    return render_template("booking.html", datum=all_data)  
 
 
 # Suggestions route

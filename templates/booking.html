@@ -34,13 +34,15 @@
 
             try {
                 const response = await axios.request(options);
-                const hotels = response.data;
+                // Assuming the hotels data is an array in response.data
+                const hotels = Array.isArray(response.data) ? response.data : [];
                 const hotelListElement = document.getElementById('hotelList');
                 hotelListElement.innerHTML = '';
 
                 hotels.forEach(hotel => {
                     const hotelDiv = document.createElement('div');
                     hotelDiv.className = 'hotel';
+                    // Adjust these lines based on the actual structure of hotel data
                     hotelDiv.innerHTML = `
                         <div class="hotel-info"><strong>${hotel.name}</strong></div>
                         <div class="hotel-info">${hotel.address}</div>
@@ -59,4 +61,5 @@
         }
     </script>
 {% endblock %}
+
 
