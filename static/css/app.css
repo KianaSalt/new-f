@@ -16,3 +16,20 @@
     
     /* Other background properties can be added as needed */
 }
+.input-form {
+    display: flex;
+    justify-content: center;
+    max-width: 600px; /* Adjust the maximum width of the form as needed */
+    margin: auto; /* Center the form horizontally */
+}
+.booking-section {
+    background-image: url('https://www.bsr.org/images/heroes/bsr-travel-hero..jpg');
+    background-size: 2000px 1000px; /* Set fixed width and height */
+    background-position: center;
+    background-attachment: fixed; /* Keep the background fixed within the viewport */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    
+    /* Other background properties can be added as needed */
+}
+
+

@@ -1,9 +1,23 @@
 {% extends "index.html" %}
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
 
 {% block content %}
 
 <body>
-    <form method="POST" action="{{ url_for('booking') }}">
+    <div class="booking-section" style="height: 50vh; width: 100%; display: flex; align-items: center; justify-content: center;">
+        <header>
+            <h1 class="mb-4">BOOKING</h1>
+            <h4>Let your mind wonder and choose any place your heart desires. </h4> 
+                <h4>Hope you enjoy your results.</h4>
+        </header>
+    </div>
+    <div style="text-align: center;">
+        <h2>Please Enter the required Information below.</h2>
+    </div>
+    <form method="POST" action="{{ url_for('booking') }}" class="input-form">
         <div class="input-box">
             <label for="cityName">City Name:</label>
             <input type="text" id="cityName" name="cityName">
@@ -17,14 +31,17 @@
         <button type="submit">Submit</button>
     </form>
 
-        <h2>Hotel Information</h2>
+    <div style="text-align: center;">
+        <div style="display: inline-block; text-align: left; padding-top: 50px;">
+            <h2>Hotel Information</h2>
             <div>
                 <p><strong>Name:</strong> {{ datum.name }}</p>
                 <p><strong>Link:</strong> <a href="{{ datum.link }}" target="_blank">Booking Link</a></p>
-                <p><strong>Rating:</strong> {{datum.rating }}</p>
+                <p><strong>Rating:</strong> {{ datum.rating }}</p>
             </div>
             <hr>
-        
+        </div>
+    </div>
     
 </body>
 

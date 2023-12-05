@@ -34,21 +34,21 @@ def booking():
 
         headers = {
             "X-RapidAPI-Key": "aa25bc40cfmshcf78ffdb3d74cd4p1af2f5jsn7e50f017bcd3",
-	        "X-RapidAPI-Host": "best-booking-com-hotel.p.rapidapi.com"
+            "X-RapidAPI-Host": "best-booking-com-hotel.p.rapidapi.com"
         }
 
         response = requests.get(url, headers=headers, params=querystring)
         data = response.json()
 
-            # Print the API response to the console
-        #print("API Response:")
-        #print(cityName)
-
+        # Render the template with the API data
         return render_template("booking.html", datum=data)
 
+    # If it's a GET request or any other case, render the form
+    return render_template("booking.html", datum=None)
+
     
     
-    
+   
     
     
     
